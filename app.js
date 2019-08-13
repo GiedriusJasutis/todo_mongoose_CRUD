@@ -10,4 +10,16 @@ const tasksRoute = require('./routes/tasks-route');
 
 app.use(tasksRoute);
 
-app.listen(2000);
+// mongoose
+
+mongoose
+  .connect(
+    ',
+    { useNewUrlParser: true }
+  )
+  .then(result => {
+    app.listen(2000);
+  })
+  .catch(err => {
+    console.log(err);
+  });

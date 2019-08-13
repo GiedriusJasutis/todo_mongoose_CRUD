@@ -14,6 +14,12 @@ const tasksCtrl = require('./../controllers/tasks-ctrl');
 route.get('/', tasksCtrl.getIndex);
 
 // post task
-route.post('/add-task', tasksCtrl.getAddTask);
+route.post('/add-task', tasksCtrl.postAddTask);
+
+// delete task
+route.get('/delete-task/:taskId', tasksCtrl.deleteTask);
+
+//update task
+route.get('/update-task/:taskId', tasksCtrl.updateTask);
 
 module.exports = route;

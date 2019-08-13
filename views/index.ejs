@@ -30,7 +30,7 @@
               class="form-control"
               type="text"
               name="addTask"
-              placeholder="Add Task"
+              placeholder="Add task"
             />
             <button class="btn btn-primary mt-2" type="submit">Add</button>
           </form>
@@ -39,11 +39,17 @@
 
       <!--Tasks list-->
       <ul>
-        <li class="list-inline mt-3">
-          some text <br />
-          <a href="/delete-task" class="text-danger">Delete</a>
-          <a href="/update-task" class="text-warning">Update</a>
+        <% if(tasks.length > 0) { %>
+          <% tasks.forEach(task => { %>
+          <li class="list-inline mt-3">
+          <%= task.task %> <br />
+          <a href="/delete-task/<%=task._id%>" class="text-danger">Delete</a>
+          <a href="/update-task/<%=task._id%>" class="text-warning">Update</a>
         </li>
+        <% }) %>
+        <% } else { %>
+          <h1 class="mt-3">Task list is emty </h1>
+        <% } %>
       </ul>
     </div>
 
