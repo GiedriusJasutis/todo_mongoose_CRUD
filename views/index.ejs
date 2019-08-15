@@ -25,36 +25,61 @@
       <hr class="my-4" />
       <div class="row">
         <div class="col-lg-6">
-          <form action="/add-task" method="POST">
+          <form
+            action="
+              <%if(updateMode){ %>
+                <%='/update-task/' + taskId %>
+              <%}else{%>
+                <%='/add-task'%>
+              <%} %>
+            "
+            method="POST"
+          >
             <input
               class="form-control"
               type="text"
               name="addTask"
               placeholder="Add task"
+              value="<% if(updateMode){ %><%= taskContent %><% } %>"
             />
-            <button class="btn btn-primary mt-2" type="submit">Add</button>
+            <button
+              class="btn <%= (updateMode) ? 'btn-warning':'btn-primary'%> mt-2"
+              type="submit"
+            >
+              <%= (updateMode) ? 'Update' : 'Add' %>
+            </button>
+
+            <% if(updateMode) { %>
+            <a href="/delete-task/<%=taskId%>" class="btn btn-danger mt-2"
+              >Delete</a
+            >
+            <a href="/" class="btn btn-dark mt-2"> Back</a>
+            <% } %>
           </form>
         </div>
       </div>
 
       <!--Tasks list-->
       <ul>
-        <% if(tasks.length > 0) { %>
-          <% tasks.forEach(task => { %>
-          <li class="list-inline mt-3">
-          <%= task.task %> <br />
-          <a href="/delete-task/<%=task._id%>" class="text-danger">Delete</a>
-          <a href="/update-task/<%=task._id%>" class="text-warning">Update</a>
+        <% if(tasks.length > 0) { %> <% tasks.forEach(task => { %>
+        <li class="list-inline mt-3">
+          <% if(!updateMode){ %>
+             <a href="/edit-task/<%=task._id%>" class="text-primary"
+            >Edit <i class="fas fa-pencil-alt"></i
+            ></a>
+            <%= task.task %>
+          <% } %>
         </li>
-        <% }) %>
-        <% } else { %>
-          <h1 class="mt-3">Task list is emty </h1>
+        <% }) %> <% } else { %>
+        <h1 class="mt-3">Task list is emty</h1>
         <% } %>
       </ul>
     </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/5d4dd63821.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

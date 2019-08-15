@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-
+const env = require('dotenv').config();
+const mongoose = require('mongoose');
 // set view engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -10,15 +11,20 @@ const tasksRoute = require('./routes/tasks-route');
 
 app.use(tasksRoute);
 
+const username = process.env.DB_USER;
+const password = process.env.DB_PASSWORD;
+const dbName = 'Todo';
+
 // mongoose
 
 mongoose
   .connect(
-    ',
+    `mongodb+srv://${username}:${password}@mycluster-9dlye.mongodb.net/${dbName}?retryWrites=true&w=majority`,
     { useNewUrlParser: true }
   )
   .then(result => {
-    app.listen(2000);
+    console.log('Connected');
+    app.listen(80, '192.168.2.19');
   })
   .catch(err => {
     console.log(err);

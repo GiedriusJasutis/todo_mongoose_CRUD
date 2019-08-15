@@ -19,7 +19,10 @@ route.post('/add-task', tasksCtrl.postAddTask);
 // delete task
 route.get('/delete-task/:taskId', tasksCtrl.deleteTask);
 
-//update task
-route.get('/update-task/:taskId', tasksCtrl.updateTask);
+//edit
+route.get('/edit-task/:taskId', tasksCtrl.editTask);
+
+// update task
+route.post('/update-task/:taskId', tasksCtrl.updateTask);
 
 module.exports = route;
