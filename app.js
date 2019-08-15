@@ -24,7 +24,7 @@ mongoose
   )
   .then(result => {
     console.log('Connected');
-    app.listen(80, '192.168.2.19');
+    app.listen(3000);
   })
   .catch(err => {
     console.log(err);
