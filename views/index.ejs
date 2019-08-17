@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-
-    <title>Todo CRUD operations</title>
+<%- include('includes/head') %>
   </head>
   <body>
     <div class="jumbotron">
@@ -57,6 +39,16 @@
             <% } %>
           </form>
         </div>
+
+        
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Hello</h5>
+              <p class="card-text">I am here</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!--Tasks list-->
@@ -64,11 +56,11 @@
         <% if(tasks.length > 0) { %> <% tasks.forEach(task => { %>
         <li class="list-inline mt-3">
           <% if(!updateMode){ %>
-             <a href="/edit-task/<%=task._id%>" class="text-primary"
+          <%= task.task %> <% } %><br />
+          <a href="/details/<%=task._id%>" class="text-success"> Details </a>
+          <a href="/edit-task/<%=task._id%>" class="text-primary"
             >Edit <i class="fas fa-pencil-alt"></i
-            ></a>
-            <%= task.task %>
-          <% } %>
+          ></a>
         </li>
         <% }) %> <% } else { %>
         <h1 class="mt-3">Task list is emty</h1>
@@ -76,24 +68,4 @@
       </ul>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/5d4dd63821.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+<%- include('includes/end')%>    
