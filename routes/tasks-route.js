@@ -25,4 +25,7 @@ route.get('/edit-task/:taskId', tasksCtrl.editTask);
 // update task
 route.post('/update-task/:taskId', tasksCtrl.updateTask);
 
+// details
+route.get('/details/:taskId', tasksCtrl.getDetails);
+
 module.exports = route;

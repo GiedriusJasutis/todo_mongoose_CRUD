@@ -6,7 +6,7 @@
       <p class="lead">Todo app for simple mongodb CRUD operations</p>
       <hr class="my-4" />
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-6 mb-3">
           <form
             action="
               <%if(updateMode){ %>
@@ -24,6 +24,23 @@
               placeholder="Add task"
               value="<% if(updateMode){ %><%= taskContent %><% } %>"
             />
+
+            <!-- buttons for updating task-->
+            <% if(updateMode){ %>
+              <input
+              class="form-control mt-1"
+              type="text"
+              name="addImage"
+              placeholder="Add image address"
+            />
+            <input
+              class="form-control mt-1"
+              type="text"
+              name="description"
+              placeholder="Description"
+            />
+            <% } %>
+              
             <button
               class="btn <%= (updateMode) ? 'btn-warning':'btn-primary'%> mt-2"
               type="submit"
@@ -38,34 +55,26 @@
             <a href="/" class="btn btn-dark mt-2"> Back</a>
             <% } %>
           </form>
-        </div>
 
-        
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Hello</h5>
-              <p class="card-text">I am here</p>
-            </div>
-          </div>
+          <!--Tasks list-->
+          <ul>
+            <% if(tasks.length > 0) { %> <% tasks.forEach(task => { %>
+            <li class="list-inline mt-3">
+              <% if(!updateMode){ %>
+              <%= task.task %> <% } %><br />
+              <a href="/details/<%=task._id%>" class="text-success"> Details </a>
+              <a href="/edit-task/<%=task._id%>" class="text-primary"
+                >Edit <i class="fas fa-pencil-alt"></i
+              ></a>
+            </li>
+            <% }) %> <% } else { %>
+            <h1 class="mt-3">Task list is emty</h1>
+            <% } %>
+          </ul>
         </div>
+      
+      <!-- row end-->
       </div>
-
-      <!--Tasks list-->
-      <ul>
-        <% if(tasks.length > 0) { %> <% tasks.forEach(task => { %>
-        <li class="list-inline mt-3">
-          <% if(!updateMode){ %>
-          <%= task.task %> <% } %><br />
-          <a href="/details/<%=task._id%>" class="text-success"> Details </a>
-          <a href="/edit-task/<%=task._id%>" class="text-primary"
-            >Edit <i class="fas fa-pencil-alt"></i
-          ></a>
-        </li>
-        <% }) %> <% } else { %>
-        <h1 class="mt-3">Task list is emty</h1>
-        <% } %>
-      </ul>
     </div>
 
 <%- include('includes/end')%>    

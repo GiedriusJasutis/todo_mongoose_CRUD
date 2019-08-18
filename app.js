@@ -15,8 +15,11 @@ const username = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
 const dbName = 'Todo';
 
-// mongoose
+exports.say = function() {
+  return 'labas';
+};
 
+// connection
 mongoose
   .connect(
     `mongodb+srv://${username}:${password}@mycluster-9dlye.mongodb.net/${dbName}?retryWrites=true&w=majority`,

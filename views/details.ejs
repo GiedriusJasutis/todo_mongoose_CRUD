@@ -1,0 +1,91 @@
+<%- include('includes/head') %>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1 class="display-4">Todo</h1>
+      <p class="lead">Todo app for simple mongodb CRUD operations</p>
+      <hr class="my-4" />
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <form
+            action="
+              <%if(updateMode){ %>
+                <%='/update-task/' + taskId %>
+              <%}else{%>
+                <%='/add-task'%>
+              <%} %>
+            "
+            method="POST"
+          >
+            <input
+              class="form-control"
+              type="text"
+              name="addTask"
+              placeholder="Add task"
+              value="<% if(updateMode){ %><%= taskContent %><% } %>"
+            />
+
+            <!-- buttons for updating task-->
+            <% if(updateMode){ %>
+              <input
+              class="form-control mt-1"
+              type="text"
+              name="addImage"
+              placeholder="Add image address"
+            />
+            <input
+              class="form-control mt-1"
+              type="text"
+              name="description"
+              placeholder="Description"
+            />
+            <% } %>
+              
+            <button
+              class="btn <%= (updateMode) ? 'btn-warning':'btn-primary'%> mt-2"
+              type="submit"
+            >
+              <%= (updateMode) ? 'Update' : 'Add' %>
+            </button>
+
+            <% if(updateMode) { %>
+            <a href="/delete-task/<%=taskId%>" class="btn btn-danger mt-2"
+              >Delete</a
+            >
+            <a href="/" class="btn btn-dark mt-2"> Back</a>
+            <% } %>
+          </form>
+
+          <!--Tasks list-->
+          <ul>
+            <% if(tasks.length > 0) { %> <% tasks.forEach(task => { %>
+            <li class="list-inline mt-3">
+              <% if(!updateMode){ %>
+              <%= task.task %> <% } %><br />
+              <a href="/details/<%=task._id%>" class="text-success"> Details </a>
+              <a href="/edit-task/<%=task._id%>" class="text-primary"
+                >Edit <i class="fas fa-pencil-alt"></i
+              ></a>
+            </li>
+            <% }) %> <% } else { %>
+            <h1 class="mt-3">Task list is emty</h1>
+            <% } %>
+          </ul>
+        </div>
+
+        
+        <div class="col-md-6">
+          <div class="card">
+            <img class="card-img-top" src="https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60" alt="Image not found">
+            <div class="card-body">
+              <h5 class="card-title">Add task and title</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque corporis voluptate commodi animi illum nihil aspernatur id dolor, laboriosam omnis quidem hic deserunt ad quasi excepturi, blanditiis minus sunt laborum.</p>
+            </div>
+          </div>
+        </div>
+      
+      <!-- row end-->
+      </div>
+    </div>
+
+<%- include('includes/end')%>    
