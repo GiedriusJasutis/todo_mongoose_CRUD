@@ -3,7 +3,7 @@ const route = express.Router();
 
 // body parser
 const bodyParser = require('body-parser');
-route.use(bodyParser.urlencoded({ extended: false }));
+route.use(bodyParser.urlencoded({ extended: true }));
 
 // task controller
 const tasksCtrl = require('./../controllers/tasks-ctrl');
@@ -27,5 +27,8 @@ route.post('/update-task/:taskId', tasksCtrl.updateTask);
 
 // details
 route.get('/details/:taskId', tasksCtrl.getDetails);
+
+// delete detail
+route.post('/delete-detail', tasksCtrl.deleteDetail);
 
 module.exports = route;

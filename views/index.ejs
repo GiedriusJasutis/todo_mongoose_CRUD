@@ -58,7 +58,8 @@
 
           <!--Tasks list-->
           <ul>
-            <% if(tasks.length > 0) { %> <% tasks.forEach(task => { %>
+            <% if(tasks.length > 0) { %> 
+            <% tasks.forEach(task => { %>
             <li class="list-inline mt-3">
               <% if(!updateMode){ %>
               <%= task.task %> <% } %><br />

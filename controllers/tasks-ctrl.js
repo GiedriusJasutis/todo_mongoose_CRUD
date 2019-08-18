@@ -1,10 +1,5 @@
 const Task = require('./../models/Task');
-const Details = require('./../models/Details');
-
-const detail = new Details({
-  image: 'some image url',
-  description: 'some description.............'
-});
+const Detail = require('./../models/Detail').Detail;
 
 exports.getIndex = (req, res) => {
   Task.find().then(tasks => {
@@ -54,10 +49,19 @@ exports.updateTask = (req, res) => {
   Task.findById(id)
     .then(task => {
       task.task = req.body.addTask;
+      if (req.body.addImage !== '' && req.body.description !== '') {
+        const detail = {
+          image: req.body.addImage,
+          description: req.body.description
+        };
+
+        console.log('added details');
+        task.details.push(detail);
+      }
+      console.log('added only task');
       return task.save();
     })
     .then(result => {
-      console.log(result);
       res.redirect('/');
     });
 };
@@ -66,14 +70,36 @@ exports.getDetails = (req, res) => {
   const id = req.params.taskId;
   Task.find().then(tasks => {
     const allTasks = tasks;
-    Task.findById(id).then(task => {
-      res.render('details', {
-        tasks: allTasks,
-        updateMode: false,
-        taskContent: task.task,
-        taskId: task._id
+    Task.findById(id)
+      .then(task => {
+        res.render('details', {
+          tasks: allTasks, // all tasks
+          updateMode: false,
+          taskContent: task.task,
+          taskId: task._id,
+          details: task.details
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-      console.log(task);
-    });
   });
+};
+
+exports.deleteDetail = (req, res, next) => {
+  const detailId = req.body.detailId;
+  const taskId = req.body.taskId;
+
+  Task.findById(taskId).then(task => {
+    task.details.find(detail => {
+      return detail._id == detailId;
+    });
+    console.log(newTask);
+    console.log(detailId);
+    //console.log(task.details);
+
+    task.save();
+  });
+
+  res.redirect('/');
 };
