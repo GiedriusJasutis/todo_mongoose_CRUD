@@ -91,15 +91,20 @@ exports.deleteDetail = (req, res, next) => {
   const taskId = req.body.taskId;
 
   Task.findById(taskId).then(task => {
-    task.details.find(detail => {
-      return detail._id == detailId;
+    const updatedDetails = task.details.filter(det => {
+      return det._id.toString() !== detailId;
     });
-    console.log(newTask);
-    console.log(detailId);
-    //console.log(task.details);
 
-    task.save();
+    task.details = updatedDetails;
+
+    return task
+      .save()
+      .then(result => {
+        console.log('Detail was deleted succesfully');
+        res.redirect('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
-
-  res.redirect('/');
 };

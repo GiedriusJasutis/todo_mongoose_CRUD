@@ -13,7 +13,8 @@ app.use(tasksRoute);
 
 const username = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
-const dbName = 'Todo';
+const dbName = process.env.DB_NAME;
+const DB_connection = `mongodb+srv://${username}:${password}@mycluster-9dlye.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 exports.say = function() {
   return 'labas';
@@ -21,10 +22,7 @@ exports.say = function() {
 
 // connection
 mongoose
-  .connect(
-    `mongodb+srv://${username}:${password}@mycluster-9dlye.mongodb.net/${dbName}?retryWrites=true&w=majority`,
-    { useNewUrlParser: true }
-  )
+  .connect(DB_connection, { useNewUrlParser: true })
   .then(result => {
     console.log('Connected');
     app.listen(3000);
