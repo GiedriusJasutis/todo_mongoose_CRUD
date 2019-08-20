@@ -1,5 +1,4 @@
 const Task = require('./../models/Task');
-const Detail = require('./../models/Detail').Detail;
 
 exports.getIndex = (req, res) => {
   Task.find().then(tasks => {
