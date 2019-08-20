@@ -6,7 +6,7 @@ exports.getIndex = (req, res) => {
     res.render('index', {
       tasks,
       updateMode: false,
-      isAuthenticated: true
+      isAuthenticated: false
     });
   });
 };
