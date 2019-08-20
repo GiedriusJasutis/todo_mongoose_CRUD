@@ -5,7 +5,8 @@ exports.getIndex = (req, res) => {
   Task.find().then(tasks => {
     res.render('index', {
       tasks,
-      updateMode: false
+      updateMode: false,
+      isAuthenticated: true
     });
   });
 };
@@ -39,12 +40,13 @@ exports.editTask = (req, res) => {
       tasks: [task],
       updateMode: true,
       taskContent: task.task,
-      taskId: task._id
+      taskId: task._id,
+      isAuthenticated: true
     });
   });
 };
 
-exports.updateTask = (req, res) => {
+exports.postUpdateTask = (req, res) => {
   const id = req.params.taskId;
   Task.findById(id)
     .then(task => {
@@ -64,42 +66,4 @@ exports.updateTask = (req, res) => {
     .then(result => {
       res.redirect('/');
     });
-};
-
-exports.getDetails = (req, res) => {
-  const id = req.params.taskId;
-  Task.find().then(tasks => {
-    const allTasks = tasks;
-    Task.findById(id)
-      .then(task => {
-        res.render('details', {
-          tasks: allTasks, // all tasks
-          updateMode: false,
-          taskContent: task.task,
-          taskId: task._id,
-          details: task.details
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  });
-};
-
-exports.deleteDetail = (req, res, next) => {
-  const detailId = req.body.detailId;
-  const taskId = req.body.taskId;
-
-  Task.findById(taskId).then(task => {
-    task.details.find(detail => {
-      return detail._id == detailId;
-    });
-    console.log(newTask);
-    console.log(detailId);
-    //console.log(task.details);
-
-    task.save();
-  });
-
-  res.redirect('/');
 };
