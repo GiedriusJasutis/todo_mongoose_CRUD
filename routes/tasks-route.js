@@ -23,12 +23,6 @@ route.get('/delete-task/:taskId', tasksCtrl.deleteTask);
 route.get('/edit-task/:taskId', tasksCtrl.editTask);
 
 // update task
-route.post('/update-task/:taskId', tasksCtrl.updateTask);
-
-// details
-route.get('/details/:taskId', tasksCtrl.getDetails);
-
-// delete detail
-route.post('/delete-detail', tasksCtrl.deleteDetail);
+route.post('/update-task/:taskId', tasksCtrl.postUpdateTask);
 
 module.exports = route;

@@ -8,8 +8,9 @@ app.set('views', 'views');
 
 // Routes
 const tasksRoute = require('./routes/tasks-route');
-
+const detailRoute = require('./routes/details-route');
 app.use(tasksRoute);
+app.use(detailRoute);
 
 const username = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
