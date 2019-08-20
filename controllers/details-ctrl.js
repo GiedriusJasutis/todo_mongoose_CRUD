@@ -1,4 +1,4 @@
-const Task = require('./../models/Task');
+const Task = require('./../models/Task').Task;
 const Detail = require('./../models/Detail').Detail;
 
 // renders details.ejs
@@ -13,7 +13,8 @@ exports.getDetails = (req, res) => {
           updateMode: false,
           taskContent: task.task,
           taskId: task._id,
-          details: task.details
+          details: task.details,
+          isAuthenticated: req.session.isLogged
         });
       })
       .catch(err => {

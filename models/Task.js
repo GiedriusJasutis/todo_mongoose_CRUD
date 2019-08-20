@@ -5,7 +5,7 @@ const detailSchema = require('./Detail').detailSchema;
 
 // Task schema
 
-const Task = new mongoose.Schema({
+const taskSchema = new mongoose.Schema({
   task: {
     type: String,
     required: true
@@ -14,4 +14,7 @@ const Task = new mongoose.Schema({
   details: [detailSchema]
 });
 
-module.exports = mongoose.model('Task', Task);
+module.exports = {
+  taskSchema,
+  Task: mongoose.model('Task', taskSchema)
+};

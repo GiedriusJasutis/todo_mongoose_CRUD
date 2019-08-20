@@ -1,4 +1,4 @@
-const Task = require('./../models/Task');
+const Task = require('./../models/Task').Task;
 const Detail = require('./../models/Detail').Detail;
 
 exports.getIndex = (req, res) => {
@@ -6,7 +6,7 @@ exports.getIndex = (req, res) => {
     res.render('index', {
       tasks,
       updateMode: false,
-      isAuthenticated: true
+      isAuthenticated: req.session.isLogged
     });
   });
 };

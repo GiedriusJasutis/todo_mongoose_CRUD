@@ -4,6 +4,12 @@
     <div class="jumbotron">
       <h1 class="display-4">Todo</h1>
       <p class="lead">Todo app for simple mongodb CRUD operations</p>
+      <p class="lead">Add task . Click edit to change task name or add additional details with pictures for your task</p>
+      <% if(isAuthenticated){ %>
+        <form action="/logout" method="POST" class="mt-3">
+          <button class="btn btn-secondary" type="submit">Logout</button>
+        </form>
+      <% } %>
       <hr class="my-4" />
       <div class="row">
         <div class="col-md-6 mb-3">
@@ -32,6 +38,7 @@
             >
               <%= (updateMode) ? 'Update' : 'Add' %>
             </button>
+            <a href="/" class="btn btn-dark mt-2"> Back</a>
 
             <% if(updateMode) { %>
             <a href="/delete-task/<%=taskId%>" class="btn btn-danger mt-2"
@@ -42,20 +49,7 @@
           </form>
 
           <!--Tasks list-->
-          <ul>
-            <% if(tasks.length > 0) { %> <% tasks.forEach(task => { %>
-            <li class="list-inline mt-3">
-              <% if(!updateMode){ %>
-              <%= task.task %> <% } %><br />
-              <a href="/details/<%=task._id%>" class="text-success"> Details </a>
-              <a href="/edit-task/<%=task._id%>" class="text-primary"
-                >Edit <i class="fas fa-pencil-alt"></i
-              ></a>
-            </li>
-            <% }) %> <% } else { %>
-            <h1 class="mt-3">Task list is emty</h1>
-            <% } %>
-          </ul>
+          
         </div>
         
         <div class="card-columns">
