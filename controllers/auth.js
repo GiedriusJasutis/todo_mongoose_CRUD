@@ -66,3 +66,10 @@ exports.postSignUp = (req, res, next) => {
 
   res.redirect('/');
 };
+
+bcrypt.hash('passwordas', 12).then(hashedValue => {
+  console.log(hashedValue);
+});
+
+const crypto = require('crypto');
+console.log(crypto);
